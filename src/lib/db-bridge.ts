@@ -1,8 +1,13 @@
-import { invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api';
 
 // User operations
 export async function findOrCreateUser(email: string) {
-  return await invoke('find_or_create_user', { email });
+  try {
+    return await invoke('find_or_create_user', { email });
+  } catch (error) {
+    console.error('Error in findOrCreateUser:', error);
+    throw error;
+  }
 }
 
 export async function updateUserTheme(userId: string, theme: {
@@ -11,12 +16,22 @@ export async function updateUserTheme(userId: string, theme: {
   linkColor: string;
   backgroundImage?: string;
 }) {
-  return await invoke('update_user_theme', { userId, theme });
+  try {
+    return await invoke('update_user_theme', { userId, theme });
+  } catch (error) {
+    console.error('Error in updateUserTheme:', error);
+    throw error;
+  }
 }
 
 // Link operations
 export async function getUserLinks(userId: string) {
-  return await invoke('get_user_links', { userId });
+  try {
+    return await invoke('get_user_links', { userId });
+  } catch (error) {
+    console.error('Error in getUserLinks:', error);
+    throw error;
+  }
 }
 
 export async function createLink(userId: string, link: {
@@ -24,7 +39,12 @@ export async function createLink(userId: string, link: {
   url: string;
   sortOrder: number;
 }) {
-  return await invoke('create_link', { userId, link });
+  try {
+    return await invoke('create_link', { userId, link });
+  } catch (error) {
+    console.error('Error in createLink:', error);
+    throw error;
+  }
 }
 
 // Agent operations
@@ -32,11 +52,21 @@ export async function updateAgentConfig(userId: string, config: {
   prompt: string;
   agentId?: string;
 }) {
-  return await invoke('update_agent_config', { userId, config });
+  try {
+    return await invoke('update_agent_config', { userId, config });
+  } catch (error) {
+    console.error('Error in updateAgentConfig:', error);
+    throw error;
+  }
 }
 
 export async function getAgentConfig(userId: string) {
-  return await invoke('get_agent_config', { userId });
+  try {
+    return await invoke('get_agent_config', { userId });
+  } catch (error) {
+    console.error('Error in getAgentConfig:', error);
+    throw error;
+  }
 }
 
 // Payment operations
@@ -44,16 +74,31 @@ export async function recordPayment(userId: string, payment: {
   amount: number;
   zapritePaymentId: string;
 }) {
-  return await invoke('record_payment', { userId, payment });
+  try {
+    return await invoke('record_payment', { userId, payment });
+  } catch (error) {
+    console.error('Error in recordPayment:', error);
+    throw error;
+  }
 }
 
 export async function getUserPayments(userId: string) {
-  return await invoke('get_user_payments', { userId });
+  try {
+    return await invoke('get_user_payments', { userId });
+  } catch (error) {
+    console.error('Error in getUserPayments:', error);
+    throw error;
+  }
 }
 
 // Search operations
 export async function searchUsers(query: string) {
-  return await invoke('search_users', { query });
+  try {
+    return await invoke('search_users', { query });
+  } catch (error) {
+    console.error('Error in searchUsers:', error);
+    throw error;
+  }
 }
 
 // Types

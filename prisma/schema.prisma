@@ -1,0 +1,60 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          String       @id @default(uuid())
+  email       String       @unique
+  zapriteKey  String?
+  agentId     String?
+  theme       Theme?
+  links       Link[]
+  agentConfig AgentConfig?
+  payments    Payment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Link {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  url       String
+  sortOrder Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AgentConfig {
+  id        String   @id @default(uuid())
+  userId    String   @unique
+  prompt    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Payment {
+  id              String   @id @default(uuid())
+  userId          String
+  amount          Float
+  zapritePaymentId String
+  date            DateTime @default(now())
+  user            User     @relation(fields: [userId], references: [id])
+}
+
+model Theme {
+  id            String  @id @default(uuid())
+  userId        String  @unique
+  backgroundColor String
+  textColor     String
+  linkColor     String
+  backgroundImage String?
+  user          User    @relation(fields: [userId], references: [id])
+}

@@ -7,6 +7,7 @@ import { SearchPods } from './components/search/SearchPods';
 import { WalletSettings } from './components/wallet/WalletSettings';
 import { AgentEditor } from './components/agent/AgentEditor';
 import { AppearanceSettings } from './components/settings/AppearanceSettings';
+import { UIGuide } from './docs/UIGuide';
 import "./App.css";
 
 function App() {
@@ -18,8 +19,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* UI Guide Route */}
+        <Route path="/ui-guide" element={<UIGuide />} />
+        
+        {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
         
+        {/* Main App Routes */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<PodPage />} />
           <Route path="pod/:id" element={<PodPage />} />

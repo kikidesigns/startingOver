@@ -3,6 +3,10 @@ import { invoke } from "@tauri-apps/api/core";
 import { MainLayout } from './components/layout/MainLayout';
 import { PodPage } from './components/pod/PodPage';
 import { Login } from './components/auth/Login';
+import { SearchPods } from './components/search/SearchPods';
+import { WalletSettings } from './components/wallet/WalletSettings';
+import { AgentEditor } from './components/agent/AgentEditor';
+import { AppearanceSettings } from './components/settings/AppearanceSettings';
 import "./App.css";
 
 function App() {
@@ -19,12 +23,10 @@ function App() {
         <Route path="/" element={<MainLayout />}>
           <Route index element={<PodPage />} />
           <Route path="pod/:id" element={<PodPage />} />
-          {/* Add other routes as components are created:
           <Route path="search" element={<SearchPods />} />
           <Route path="wallet" element={<WalletSettings />} />
           <Route path="agent" element={<AgentEditor />} />
           <Route path="appearance" element={<AppearanceSettings />} />
-          */}
         </Route>
       </Routes>
     </BrowserRouter>
